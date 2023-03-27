@@ -1,170 +1,160 @@
 const idRegex = /^[0-9]{6}$/;
 const nameRegex = /^[A-Za-z]+$/;
-const emailRegex = /^[a-z_]{3,}@[a-z]{3,}[.]{1}[a-z.]{2,6}$/;
 
 const Products = [];
 
-function createEmployee(Eid, Efname, Emname, Elname, Eemail, Egender) {
-    this.Eid = Eid;
-    this.Efname = Efname;
-    this.Emname = Emname;
-    this.Elname = Elname;
-    this.Eemail = Eemail;
-    this.Egender = Egender;
+function createProduct(pId, pName, pImage, pPrice, pDesc) {
+    this.pId = pId;
+    this.pName = pName;
+    this.pImage = pImage;
+    this.pPrice = pPrice;
+    this.pDesc = pDesc;
 }
 
-const orig_eid_ip = document.getElementById("empId");
-const orig_fname_ip = document.getElementById("empFname");
-const orig_mname_ip = document.getElementById("empMname");
-const orig_lname_ip = document.getElementById("empLname");
-const orig_email_ip = document.getElementById("empEmail");
+const orig_pid = document.getElementById("prdId");
+const orig_pname = document.getElementById("prdName");
+const orig_pimage = document.getElementById("prdImage");
+const orig_pprice = document.getElementById("prdPrice");
+const orig_pdesc = document.getElementById("prdDesc");
 
-function addEmployee() {
+function addProduct() {
 
     let flag = true;
 
-    const eid = document.getElementById("empId").value.trim();
-    const fname = document.getElementById("empFname").value.trim();
-    const mname = document.getElementById("empMname").value.trim();
-    const lname = document.getElementById("empLname").value.trim();
-    const email = document.getElementById("empEmail").value.trim();
+    const pid = document.getElementById("prdId").value.trim();
+    const pname = document.getElementById("prdName").value.trim();
+    const pimage = document.getElementById("prdImage").value.trim();
+    const pprice = document.getElementById("prdPrice").value.trim();
+    const pdesc = document.getElementById("prdDesc").value.trim();
 
     // set default content and style 
 
-    document.getElementById("empIdError").innerHTML = "";
-    document.getElementById("empId").style = orig_eid_ip;
+    document.getElementById("prdIdError").innerHTML = "";
+    document.getElementById("prdId").style = orig_pid;
 
-    document.getElementById("empFnameError").innerHTML = "";
-    document.getElementById("empFname").style = orig_fname_ip;
+    document.getElementById("prdNameError").innerHTML = "";
+    document.getElementById("prdName").style = orig_pname;
 
-    document.getElementById("empMnameError").innerHTML = "";
-    document.getElementById("empMname").style = orig_mname_ip;
+    document.getElementById("prdImageError").innerHTML = "";
+    document.getElementById("prdImage").style = orig_pimage;
 
-    document.getElementById("empLnameError").innerHTML = "";
-    document.getElementById("empLname").style = orig_lname_ip;
+    document.getElementById("prdPriceError").innerHTML = "";
+    document.getElementById("prdPrice").style = orig_pprice;
 
-    document.getElementById("empEmailError").innerHTML = "";
-    document.getElementById("empEmail").style = orig_email_ip;
+    document.getElementById("prdDescError").innerHTML = "";
+    document.getElementById("prdDesc").style = orig_pdesc;
 
     if(flag) {
 
-        if(eid=='') {
-            document.getElementById("empIdError").innerHTML = "Id is required";
-            document.getElementById("empId").style.border = "1px solid red";
+        if(pid=='') {
+            document.getElementById("prdIdError").innerHTML = "Id is required";
+            document.getElementById("prdId").style.border = "1px solid red";
             flag = false;
         }
 
-        if(fname=='') {
-            document.getElementById("empFnameError").innerHTML = "First name is required";
-            document.getElementById("empFname").style.border = "1px solid red";
+        if(pname=='') {
+            document.getElementById("prdNameError").innerHTML = "name is required";
+            document.getElementById("prdName").style.border = "1px solid red";
             flag = false;
         }
 
-        if(mname=='') {
-            document.getElementById("empMnameError").innerHTML = "Middle name is required";
-            document.getElementById("empMname").style.border = "1px solid red";
+        if(pimage=='') {
+            document.getElementById("prdImageError").innerHTML = "image is required";
+            document.getElementById("prdImage").style.border = "1px solid red";
             flag = false;
         }
 
-        if(lname=='') {
-            document.getElementById("empLnameError").innerHTML = "Last name is required";
-            document.getElementById("empLname").style.border = "1px solid red";
+        if(pprice=='') {
+            document.getElementById("prdPriceError").innerHTML = "price is required";
+            document.getElementById("prdPrice").style.border = "1px solid red";
             flag = false;
         }
 
-        if(email=='') {
-            document.getElementById("empEmailError").innerHTML = "Email is required";
-            document.getElementById("empEmail").style.border = "1px solid red";
+        if(pdesc=='') {
+            document.getElementById("prdDescError").innerHTML = "description is required";
+            document.getElementById("prdDesc").style.border = "1px solid red";
             flag = false;
         }
 
     }
 
-    if (!idRegex.test(eid) && eid != '') {
-        document.getElementById("empIdError").innerHTML = "Id is invalid it must contain 6 digits only";
-        document.getElementById("empId").style.border = "1px solid red";
+    if (!idRegex.test(pid) && pid != '') {
+        document.getElementById("prdIdError").innerHTML = "Id is invalid it must contain 6 digits only";
+        document.getElementById("prdId").style.border = "1px solid red";
         flag = false;
     }
 
-    if (!nameRegex.test(fname) && fname != '') {
-        document.getElementById("empFnameError").innerHTML = "First name is invalid";
-        document.getElementById("empFname").style.border = "1px solid red";
-        flag = false;
-    }
-
-    if (!nameRegex.test(mname) && mname != '') {
-        document.getElementById("empMnameError").innerHTML = "middle name is invalid";
-        document.getElementById("empMname").style.border = "1px solid red";
-        flag = false;
-    }
-
-    if (!nameRegex.test(lname) && lname != '') {
-        document.getElementById("empLnameError").innerHTML = "last name is invalid";
-        document.getElementById("empLname").style.border = "1px solid red";
-        flag = false;
-    }
-
-    if (!emailRegex.test(email) && email != '') {
-        document.getElementById("empEmailError").innerHTML = "email is invalid";
-        document.getElementById("empEmail").style.border = "1px solid red";
+    if (!nameRegex.test(pname) && pname != '') {
+        document.getElementById("prdNameError").innerHTML = "product name is invalid";
+        document.getElementById("prdName").style.border = "1px solid red";
         flag = false;
     }
 
     if(flag) {
 
-        Employees.push(new createEmployee(eid, fname, mname, lname, email, gender));
-        localStorage.setItem('employees', JSON.stringify(Employees));
+        Products.push(new createProduct(pid, pname, pimage, pprice, pdesc));
+        localStorage.setItem('products', JSON.stringify(Products));
 
-        let emps = JSON.parse(localStorage.getItem('employees'));
-        console.log(emps[0].Eemail);
+        let prds = JSON.parse(localStorage.getItem('products'));
+        // console.log(prds[0].pid);
 
         const tblContainer = document.getElementById('tblContainer');
 
-        const tbl = document.getElementById('empTbl');
+        const tbl = document.getElementById('prdTbl');
         const body = document.body;
-
-        const updateBtn = document.getElementById('updateTD');
-        const deleteBtn = document.getElementById('deleteTD');
-
         
-        for (let i = 0; i < emps.length; i++) {
+        for (let i = 0; i < prds.length; i++) {
 
-            let empData = Object.values(emps[i]);
+            let prdData = Object.values(prds[i]);
 
             const tr = tbl.insertRow();
             
             const td1 = tr.insertCell();
-            td1.appendChild(document.createTextNode(empData[0]));
+            td1.appendChild(document.createTextNode(prdData[0]));
             // td1.style.border = "1px solid black";
             // td1.style.textAlign = "center";
 
             const td2 = tr.insertCell();
-            td2.appendChild(document.createTextNode(empData[1]));
+            td2.appendChild(document.createTextNode(prdData[1]));
             // td2.style.border = "1px solid black";
             // td2.style.textAlign = "center";
 
             const td3 = tr.insertCell();
-            td3.appendChild(document.createTextNode(empData[2]));
+            td3.appendChild(document.createTextNode(prdData[2]));
             // td3.style.border = "1px solid black";
             // td3.style.textAlign = "center";
 
             const td4 = tr.insertCell();
-            td4.appendChild(document.createTextNode(empData[3]));
+            td4.appendChild(document.createTextNode(prdData[3]));
             // td4.style.border = "1px solid black";
             // td4.style.textAlign = "center";
 
             const td5 = tr.insertCell();
-            td5.appendChild(document.createTextNode(empData[4]));
+            td5.appendChild(document.createTextNode(prdData[4]));
             // td5.style.border = "1px solid black";
             // td5.style.textAlign = "center";
 
             const td6 = tr.insertCell();
-            td6.appendChild(document.createTextNode(empData[5]));
-            // td6.style.border = "1px solid black";
-            // td6.style.textAlign = "center";
 
-            tr.appendChild(updateBtn);
-            tr.appendChild(deleteBtn);
+            let updateBtn = document.createElement('button');
+            updateBtn.setAttribute('class', 'btn btn-light text-center w-75');
+
+            let updateIcon = document.createElement('i');
+            updateIcon.setAttribute('class', 'fa-solid fa-pen-to-square');
+
+            updateBtn.appendChild(updateIcon);
+            td6.appendChild(updateBtn);
+
+            const td7 = tr.insertCell();
+
+            let deleteBtn = document.createElement('button');
+            deleteBtn.setAttribute('class', 'btn btn-light text-center w-75');
+
+            let deleteIcon = document.createElement('i');
+            deleteIcon.setAttribute('class', 'fa-solid fa-trash');
+
+            deleteBtn.appendChild(deleteIcon);
+            td7.appendChild(deleteBtn);
         }
 
         tblContainer.appendChild(tbl);
@@ -184,30 +174,28 @@ function addEmployee() {
 
 function resetModal() {
 
-    document.getElementById("empIdError").innerHTML = "";
-    document.getElementById("empId").style = orig_eid_ip;
+    document.getElementById("prdIdError").innerHTML = "";
+    document.getElementById("prdId").style = orig_pid;
 
-    document.getElementById("empFnameError").innerHTML = "";
-    document.getElementById("empFname").style = orig_fname_ip;
+    document.getElementById("prdNameError").innerHTML = "";
+    document.getElementById("prdName").style = orig_pname;
 
-    document.getElementById("empMnameError").innerHTML = "";
-    document.getElementById("empMname").style = orig_mname_ip;
+    document.getElementById("prdImageError").innerHTML = "";
+    document.getElementById("prdImage").style = orig_pimage;
 
-    document.getElementById("empLnameError").innerHTML = "";
-    document.getElementById("empLname").style = orig_lname_ip;
+    document.getElementById("prdPriceError").innerHTML = "";
+    document.getElementById("prdPrice").style = orig_pprice;
 
-    document.getElementById("empEmailError").innerHTML = "";
-    document.getElementById("empEmail").style = orig_email_ip;
-
-    document.getElementById("empGenderError").innerHTML = "";
+    document.getElementById("prdDescError").innerHTML = "";
+    document.getElementById("prdDesc").style = orig_pdesc;
 
     reset();
 }
 
 function reset() {
-    document.getElementById("empId").value = "";
-    document.getElementById("empFname").value = "";
-    document.getElementById("empMname").value = "";
-    document.getElementById("empLname").value = "";
-    document.getElementById("empEmail").value = "";
+    document.getElementById("prdId").value = "";
+    document.getElementById("prdName").value = "";
+    document.getElementById("prdImage").value = "";
+    document.getElementById("prdPrice").value = "";
+    document.getElementById("prdDesc").value = "";
 }

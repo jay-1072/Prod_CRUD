@@ -21,10 +21,10 @@
         </script>
 
     <!-- my style  -->
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="style.css">
 
     <!-- my script -->
-    <script defer src="js/script.js"></script>
+    <script defer src="script.js"></script>
 </head>
 
 <body>
@@ -67,7 +67,7 @@
                 <div class="row">
                     <div class="col">
                         <!-- Button trigger modal -->
-                        <button type="button" class="btn my-4 btn-light new-emp" data-bs-toggle="modal" data-bs-target="#newPrdModal">
+                        <button type="button" class="btn my-4 btn-light new-prd" data-bs-toggle="modal" data-bs-target="#newPrdModal">
                             New Product &nbsp;<i class="fa-solid fa-user"></i>
                         </button>
                     </div>
@@ -89,33 +89,33 @@
 
                 <!-- modal body -->
                 <div class="modal-body">
-                    <!-- for Id -->
+                    <!-- for Product Id -->
                     <div class="form-floating mb-3">
                         <input type="number" class="form-control shadow-none prd-id" id="prdId" name="prdId">
                         <label for="prdId">Product Id</label>
                         <strong id="prdIdError" class="text-danger font-wight-bold"></strong>
                     </div>
-                    <!-- for First Name -->
+                    <!-- for Product Name -->
                     <div class="form-floating mb-3">
                         <input type="text" class="form-control shadow-none prd-name" id="prdName" name="prdName">
                         <label for="prdName">Product Name</label>
                         <strong id="prdNameError" class="text-danger font-wight-bold"></strong>
                     </div>
-                    <!-- For Middle Name -->
+                    <!-- For Product Image -->
                     <div class="form-floating mb-3">
                         <input type="text" class="form-control shadow-none prd-img" id="prdImage" name="prdImage">
                         <label for="prdImage">Product Image</label>
                         <strong id="prdImageError" class="text-danger font-wight-bold"></strong>
                     </div>
-                    <!-- For Last Name -->
+                    <!-- For Product Price -->
                     <div class="form-floating mb-3">
                         <input type="text" class="form-control shadow-none prd-price" id="prdPrice" name="prdPrice">
                         <label for="prdPrice">Product Price</label>
                         <strong id="prdPriceError" class="text-danger font-wight-bold"></strong>
                     </div>
-                    <!-- For Email -->
+                    <!-- For Product Description -->
                     <div class="form-floating mb-3">
-                        <input type="text" class="form-control shadow-none prd-desc" id="prdDesc" name="prdDesc">
+                        <textarea class="form-control shadow-none prd-desc" id="prdDesc" name="prdDesc"></textarea>
                         <label for="prdDesc">Product Description</label>
                         <strong id="prdDescError" class="text-danger font-wight-bold"></strong>
                     </div>
@@ -167,10 +167,10 @@
                         <td>abc</td>
                         <td>abc</td>
                         <td>abc</td>
-                        <td id="updateTD">
+                        <td>
                             <button type="button" class="btn btn-light text-center w-75"><i class="fa-solid fa-pen-to-square"></i></button>
                         </td>
-                        <td id="deleteTD">
+                        <td>
                             <button type="button" class="btn btn-light text-center w-75"><i class="fa-solid fa-trash"></i></button>
                         </td>
                     </tr>
