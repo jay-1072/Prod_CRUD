@@ -62,12 +62,12 @@
     <div class="main">
 
     <!-- Add new employee button started -->
-        <div class="new-emp-btn">
+        <div class="new-prd-btn">
             <div class="container">
                 <div class="row">
                     <div class="col">
                         <!-- Button trigger modal -->
-                        <button type="button" class="btn my-4 btn-light new-emp" data-bs-toggle="modal" data-bs-target="#newEmpModal">
+                        <button type="button" class="btn my-4 btn-light new-emp" data-bs-toggle="modal" data-bs-target="#newPrdModal">
                             New Product &nbsp;<i class="fa-solid fa-user"></i>
                         </button>
                     </div>
@@ -77,13 +77,13 @@
 
     <!-- Modal for new employee started -->
 
-    <div class="modal fade" id="newEmpModal" tabindex="-1" aria-hidden="true" aria-labelledby="newEmpModalLabel">
+    <div class="modal fade" id="newPrdModal" tabindex="-1" aria-hidden="true" aria-labelledby="newPrdModalLabel">
         <!-- modal dialog -->
         <div class="modal-dialog">
             <div class="modal-content">
                 <!-- modal header -->
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="newEmpModalLabel" style="padding-left: 170px;">Add New Product</h1>
+                    <h1 class="modal-title fs-5" id="newPrdModalLabel" style="padding-left: 170px;">Add New Product</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="resetModal()"></button>
                 </div>
 
@@ -91,45 +91,40 @@
                 <div class="modal-body">
                     <!-- for Id -->
                     <div class="form-floating mb-3">
-                        <input type="number" class="form-control shadow-none emp-id" id="empId" name="empId"
-                            required>
-                        <label for="empId">Product Id</label>
-                        <strong id="empIdError" class="text-danger font-wight-bold"></strong>
+                        <input type="number" class="form-control shadow-none prd-id" id="prdId" name="prdId">
+                        <label for="prdId">Product Id</label>
+                        <strong id="prdIdError" class="text-danger font-wight-bold"></strong>
                     </div>
                     <!-- for First Name -->
                     <div class="form-floating mb-3">
-                        <input type="text" class="form-control shadow-none emp-fname" id="empFname" name="empFname" onfocus=""
-                            required>
-                        <label for="empFname">Product Name</label>
-                        <strong id="empFnameError" class="text-danger font-wight-bold"></strong>
+                        <input type="text" class="form-control shadow-none prd-name" id="prdName" name="prdName">
+                        <label for="prdName">Product Name</label>
+                        <strong id="prdNameError" class="text-danger font-wight-bold"></strong>
                     </div>
                     <!-- For Middle Name -->
                     <div class="form-floating mb-3">
-                        <input type="text" class="form-control shadow-none emp-mname" id="empMname" name="empMname"
-                            required>
-                        <label for="empMname">Product Image</label>
-                        <strong id="empMnameError" class="text-danger font-wight-bold"></strong>
+                        <input type="text" class="form-control shadow-none prd-img" id="prdImage" name="prdImage">
+                        <label for="prdImage">Product Image</label>
+                        <strong id="prdImageError" class="text-danger font-wight-bold"></strong>
                     </div>
                     <!-- For Last Name -->
                     <div class="form-floating mb-3">
-                        <input type="text" class="form-control shadow-none emp-lname" id="empLname" name="empLname"
-                            required>
-                        <label for="empLname">Product Price</label>
-                        <strong id="empLnameError" class="text-danger font-wight-bold"></strong>
+                        <input type="text" class="form-control shadow-none prd-price" id="prdPrice" name="prdPrice">
+                        <label for="prdPrice">Product Price</label>
+                        <strong id="prdPriceError" class="text-danger font-wight-bold"></strong>
                     </div>
                     <!-- For Email -->
                     <div class="form-floating mb-3">
-                        <input type="email" class="form-control shadow-none emp-email" id="empEmail" name="empEmail"
-                            required>
-                        <label for="empEmail">Product Description</label>
-                        <strong id="empEmailError" class="text-danger font-wight-bold"></strong>
+                        <input type="text" class="form-control shadow-none prd-desc" id="prdDesc" name="prdDesc">
+                        <label for="prdDesc">Product Description</label>
+                        <strong id="prdDescError" class="text-danger font-wight-bold"></strong>
                     </div>
                 </div>
 
                 <!-- modal footer -->
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="resetModal()">Close</button>
-                    <input type="submit" value="Add" class="btn btn-primary" id="liveToastBtn" onclick="addEmployee()">
+                    <input type="submit" value="Add" class="btn btn-primary" id="liveToastBtn" onclick="addProduct()">
                 </div>
             </div>
         </div>
@@ -146,7 +141,7 @@
                 <button type="button" class="btn btn-close" data-bs-dismiss="toast" aria-label="Close" style="margin-left: 170px;"></button>
             </div>
             <div class="toast-body">
-                Employee added successfully.
+                Product added successfully.
             </div>
         </div>
     </div>
@@ -154,7 +149,7 @@
     <!-- container for table -->
         <div class="container" id="tblContainer">
             <!-- table started -->
-            <table class="table" id="empTbl">
+            <table class="table" id="prdTbl">
                 <thead class="table-dark">
                     <tr>
                         <th scope="col">Product ID</th>
