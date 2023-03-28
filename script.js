@@ -4,8 +4,6 @@ viewProducts();
 const idRegex = /^[0-9]{6}$/;
 const nameRegex = /^[A-Za-z]+$/;
 
-
-
 let base64;
 
 let Products = [];
@@ -107,7 +105,9 @@ function addProduct() {
 
     if(flag) {
 
-        Products = JSON.parse(localStorage.getItem('products'));
+        if(Products!="") {
+            Products = JSON.parse(localStorage.getItem('products'));
+        }
 
         Products.push(new createProduct(pid, pname, base64, pprice, pdesc));
         localStorage.setItem('products', JSON.stringify(Products));
@@ -127,10 +127,15 @@ function addProduct() {
 }
 
 
+// view product functionality
+
 function viewProducts(pid, flag) {
 
         let prds = JSON.parse(localStorage.getItem('products'));
-        // console.log(prds[0].pid);
+
+        if(prds==null) {
+            return;
+        }
 
         const tblContainer = document.getElementById('tblContainer');
 
@@ -182,21 +187,29 @@ function viewProducts(pid, flag) {
             td5.appendChild(document.createTextNode(prdData[4]));
             td5.setAttribute('class', 'align-middle')
 
-            // td6
+            // td6 for update button
 
             const td6 = tr.insertCell();
             td6.setAttribute('class', 'align-middle');
 
             let updateBtn = document.createElement('button');
             updateBtn.setAttribute('class', 'btn btn-light text-center w-75');
+            updateBtn.setAttribute('data-bs-toggle', 'modal');
+            updateBtn.setAttribute('data-bs-target', '#updatePrdModal');
+
+            // updateBtn.onclick = function() {
+            //     updateProduct(prds[i]);
+            // }
 
             let updateIcon = document.createElement('i');
             updateIcon.setAttribute('class', 'fa-solid fa-pen-to-square');
+            
 
             updateBtn.appendChild(updateIcon);
             td6.appendChild(updateBtn);
 
-            // td7
+            // td7 for delete button
+            
             const td7 = tr.insertCell();
             td7.setAttribute('class', 'align-middle');
 
@@ -216,6 +229,55 @@ function viewProducts(pid, flag) {
         tblContainer.appendChild(tbl);
         body.appendChild(tblContainer);
 }
+
+// update product functionality
+let targetObj;
+
+function updateProduct(prd) {
+
+    document.getElementById("prdId").value = prd.pId;
+    document.getElementById("prdName").value = prd.pName;
+    document.getElementById("prdImage").innerHTML = prd.pImage;
+    document.getElementById("prdPrice").value = prd.pPrice;
+    document.getElementById("prdDesc").value = prd.pDesc;
+
+    let prds = JSON.parse(localStorage.getItem('products'));
+
+    
+    prds.forEach(obj => {
+        if(obj.pId==prd.pId) {
+            targetObj = obj;
+            return;
+        }
+    });
+
+    // targetObj.pId = document.getElementById("prdId").value;
+    // targetObj.pName = document.getElementById("prdName").value;
+    // targetObj.pImage = document.getElementById("prdImage").value;
+    // targetObj.pPrice = document.getElementById("prdPrice").value;
+    // targetObj.pDesc = document.getElementById("prdDesc").value;
+
+    // console.log(targetObj);
+}
+
+
+
+
+
+// delete product functionality
+
+function deleteProduct(prd) {
+    let prds = JSON.parse(localStorage.getItem('products'));
+
+    prds = prds.filter(obj => {
+        return (obj.pId != prd.pId);
+    });
+
+    localStorage.setItem('products', JSON.stringify(prds));
+
+    window.location.reload();
+}
+
 
 function resetModal() {
 
@@ -243,16 +305,4 @@ function reset() {
     document.getElementById("prdImage").value = "";
     document.getElementById("prdPrice").value = "";
     document.getElementById("prdDesc").value = "";
-}
-
-function deleteProduct(prd) {
-    let prds = JSON.parse(localStorage.getItem('products'));
-
-    prds = prds.filter(obj => {
-        return (obj.pId != prd.pId);
-    });
-
-    localStorage.setItem('products', JSON.stringify(prds));
-
-    window.location.reload();
 }
