@@ -2,3 +2,7 @@ button.new-prd {
     color: rgb(200, 100, 200);
     font-weight: 500;
 }
+
+tr td div img {
+    vertical-align: middle;
+}

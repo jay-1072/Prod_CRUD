@@ -1,7 +1,22 @@
+viewProducts();
+
+
 const idRegex = /^[0-9]{6}$/;
 const nameRegex = /^[A-Za-z]+$/;
 
-const Products = [];
+
+
+let base64;
+
+let Products = [];
+
+document.getElementById('prdImage').addEventListener('change', function() {
+    let reader = new FileReader();
+    reader.addEventListener('load', () => {
+        base64 = reader.result;
+    });
+    reader.readAsDataURL(this.files[0]);
+});
 
 function createProduct(pId, pName, pImage, pPrice, pDesc) {
     this.pId = pId;
@@ -23,7 +38,7 @@ function addProduct() {
 
     const pid = document.getElementById("prdId").value.trim();
     const pname = document.getElementById("prdName").value.trim();
-    const pimage = document.getElementById("prdImage").value.trim();
+    const pimage = document.getElementById("prdImage");
     const pprice = document.getElementById("prdPrice").value.trim();
     const pdesc = document.getElementById("prdDesc").value.trim();
 
@@ -92,8 +107,27 @@ function addProduct() {
 
     if(flag) {
 
-        Products.push(new createProduct(pid, pname, pimage, pprice, pdesc));
+        Products = JSON.parse(localStorage.getItem('products'));
+
+        Products.push(new createProduct(pid, pname, base64, pprice, pdesc));
         localStorage.setItem('products', JSON.stringify(Products));
+
+        viewProducts(pid, true);
+
+        // Toast show
+        const toastTrigger = document.getElementById('liveToastBtn');
+        const toastLiveExample = document.getElementById('liveToast');
+       
+        if (toastTrigger) {
+            const toast = new bootstrap.Toast(toastLiveExample);
+            toast.show();
+            reset();
+        }
+    }
+}
+
+
+function viewProducts(pid, flag) {
 
         let prds = JSON.parse(localStorage.getItem('products'));
         // console.log(prds[0].pid);
@@ -107,34 +141,51 @@ function addProduct() {
 
             let prdData = Object.values(prds[i]);
 
+            if(pid!=prdData[0] && flag) {
+                continue;
+            }
+
             const tr = tbl.insertRow();
             
+            // td1
             const td1 = tr.insertCell();
             td1.appendChild(document.createTextNode(prdData[0]));
-            // td1.style.border = "1px solid black";
-            // td1.style.textAlign = "center";
+            td1.setAttribute('class', 'align-middle')
 
+            // td2
             const td2 = tr.insertCell();
             td2.appendChild(document.createTextNode(prdData[1]));
-            // td2.style.border = "1px solid black";
-            // td2.style.textAlign = "center";
+            td2.setAttribute('class', 'align-middle')
 
+            // td3
             const td3 = tr.insertCell();
-            td3.appendChild(document.createTextNode(prdData[2]));
-            // td3.style.border = "1px solid black";
-            // td3.style.textAlign = "center";
 
+            let prd_img_div = document.createElement('div');
+            prd_img_div.setAttribute('style', 'width:100px;');
+            prd_img_div.setAttribute('class', 'object-fit-fill');
+
+            let prd_img = document.createElement('img');
+            prd_img.setAttribute('style', 'max-width: 100%; heigth:auto;');
+            prd_img.setAttribute('src', `${prdData[2]}`);
+            
+            
+            prd_img_div.appendChild(prd_img);
+            td3.appendChild(prd_img_div);
+            
+            // td4
             const td4 = tr.insertCell();
             td4.appendChild(document.createTextNode(prdData[3]));
-            // td4.style.border = "1px solid black";
-            // td4.style.textAlign = "center";
+            td4.setAttribute('class', 'align-middle');
 
+            // td5
             const td5 = tr.insertCell();
             td5.appendChild(document.createTextNode(prdData[4]));
-            // td5.style.border = "1px solid black";
-            // td5.style.textAlign = "center";
+            td5.setAttribute('class', 'align-middle')
+
+            // td6
 
             const td6 = tr.insertCell();
+            td6.setAttribute('class', 'align-middle');
 
             let updateBtn = document.createElement('button');
             updateBtn.setAttribute('class', 'btn btn-light text-center w-75');
@@ -145,10 +196,15 @@ function addProduct() {
             updateBtn.appendChild(updateIcon);
             td6.appendChild(updateBtn);
 
+            // td7
             const td7 = tr.insertCell();
+            td7.setAttribute('class', 'align-middle');
 
             let deleteBtn = document.createElement('button');
             deleteBtn.setAttribute('class', 'btn btn-light text-center w-75');
+            deleteBtn.onclick = function() {
+                deleteProduct(prds[i]);
+            }           
 
             let deleteIcon = document.createElement('i');
             deleteIcon.setAttribute('class', 'fa-solid fa-trash');
@@ -159,17 +215,6 @@ function addProduct() {
 
         tblContainer.appendChild(tbl);
         body.appendChild(tblContainer);
-
-        // Toast show
-        const toastTrigger = document.getElementById('liveToastBtn');
-        const toastLiveExample = document.getElementById('liveToast');
-       
-        if (toastTrigger) {
-            const toast = new bootstrap.Toast(toastLiveExample);
-            toast.show();
-            reset();
-        }
-    }
 }
 
 function resetModal() {
@@ -198,4 +243,16 @@ function reset() {
     document.getElementById("prdImage").value = "";
     document.getElementById("prdPrice").value = "";
     document.getElementById("prdDesc").value = "";
+}
+
+function deleteProduct(prd) {
+    let prds = JSON.parse(localStorage.getItem('products'));
+
+    prds = prds.filter(obj => {
+        return (obj.pId != prd.pId);
+    });
+
+    localStorage.setItem('products', JSON.stringify(prds));
+
+    window.location.reload();
 }
