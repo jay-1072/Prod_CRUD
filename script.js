@@ -4,11 +4,20 @@ viewProducts();
 const idRegex = /^[0-9]{6}$/;
 const nameRegex = /^[A-Za-z]+$/;
 
-let base64;
+let base64, tmpImg;
 
 let Products = [];
 
 document.getElementById('prdImage').addEventListener('change', function() {
+    let reader = new FileReader();
+    reader.addEventListener('load', () => {
+        base64 = reader.result;
+    });
+    reader.readAsDataURL(this.files[0]);
+});
+
+document.getElementById('uprdImage').addEventListener('change', function() {
+    
     let reader = new FileReader();
     reader.addEventListener('load', () => {
         base64 = reader.result;
@@ -197,9 +206,9 @@ function viewProducts(pid, flag) {
             updateBtn.setAttribute('data-bs-toggle', 'modal');
             updateBtn.setAttribute('data-bs-target', '#updatePrdModal');
 
-            // updateBtn.onclick = function() {
-            //     updateProduct(prds[i]);
-            // }
+            updateBtn.onclick = function() {
+                updateProduct(prds[i]);
+            }
 
             let updateIcon = document.createElement('i');
             updateIcon.setAttribute('class', 'fa-solid fa-pen-to-square');
@@ -235,34 +244,46 @@ let targetObj;
 
 function updateProduct(prd) {
 
-    document.getElementById("prdId").value = prd.pId;
-    document.getElementById("prdName").value = prd.pName;
-    document.getElementById("prdImage").innerHTML = prd.pImage;
-    document.getElementById("prdPrice").value = prd.pPrice;
-    document.getElementById("prdDesc").value = prd.pDesc;
+    document.getElementById("uprdId").value = prd.pId;
+    document.getElementById("uprdName").value = prd.pName;
+    document.getElementById("uprdImage").innerHTML = prd.pImage;
+    document.getElementById("uprdPrice").value = prd.pPrice;
+    document.getElementById("uprdDesc").value = prd.pDesc;
 
     let prds = JSON.parse(localStorage.getItem('products'));
 
-    
     prds.forEach(obj => {
         if(obj.pId==prd.pId) {
             targetObj = obj;
+            delete obj;
             return;
         }
     });
 
-    // targetObj.pId = document.getElementById("prdId").value;
-    // targetObj.pName = document.getElementById("prdName").value;
-    // targetObj.pImage = document.getElementById("prdImage").value;
-    // targetObj.pPrice = document.getElementById("prdPrice").value;
-    // targetObj.pDesc = document.getElementById("prdDesc").value;
-
-    // console.log(targetObj);
+    tmpImg = targetObj.pImage;
 }
 
+function update() {
 
+    let oldId = targetObj.pId;
+    targetObj.pId = document.getElementById("uprdId").value;
+    targetObj.pName = document.getElementById("uprdName").value;
+    targetObj.pImage = base64==''?tmpImg:base64;
+    targetObj.pPrice = document.getElementById("uprdPrice").value;
+    targetObj.pDesc = document.getElementById("uprdDesc").value;
 
+    let prds = JSON.parse(localStorage.getItem('products'));
+    for(let i=0; i<prds.length; i++) {
+        if(prds[i].pId==oldId) {
+            prds[i] = targetObj;
+            break;
+        }
+    }
 
+    localStorage.setItem('products', JSON.stringify(prds));
+
+    reset(true);
+}
 
 // delete product functionality
 
@@ -299,10 +320,21 @@ function resetModal() {
     reset();
 }
 
-function reset() {
-    document.getElementById("prdId").value = "";
-    document.getElementById("prdName").value = "";
-    document.getElementById("prdImage").value = "";
-    document.getElementById("prdPrice").value = "";
-    document.getElementById("prdDesc").value = "";
+function reset(flag) {
+    
+    if(flag) {
+        document.getElementById("uprdId").value = "";
+        document.getElementById("uprdName").value = "";
+        document.getElementById("uprdImage").value = "";
+        document.getElementById("uprdPrice").value = "";
+        document.getElementById("uprdDesc").value = "";
+        window.location.reload();
+    }
+    else {
+        document.getElementById("prdId").value = "";
+        document.getElementById("prdName").value = "";
+        document.getElementById("prdImage").value = "";
+        document.getElementById("prdPrice").value = "";
+        document.getElementById("prdDesc").value = "";
+    }
 }

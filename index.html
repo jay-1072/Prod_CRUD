@@ -21,7 +21,7 @@
         </script>
 
     <!-- my style  -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
 
     <!-- my script -->
     <script defer src="script.js"></script>
@@ -149,40 +149,40 @@
             <div class="modal-body">
                 <!-- for Product Id -->
                 <div class="form-floating mb-3">
-                    <input type="number" class="form-control shadow-none prd-id" id="prdId" name="prdId">
-                    <label for="prdId">Product Id</label>
-                    <strong id="prdIdError" class="text-danger font-wight-bold"></strong>
+                    <input type="number" class="form-control shadow-none uprd-id" id="uprdId" name="uprdId">
+                    <label for="uprdId">Product Id</label>
+                    <strong id="uprdIdError" class="text-danger font-wight-bold"></strong>
                 </div>
                 <!-- for Product Name -->
                 <div class="form-floating mb-3">
-                    <input type="text" class="form-control shadow-none prd-name" id="prdName" name="prdName">
-                    <label for="prdName">Product Name</label>
-                    <strong id="prdNameError" class="text-danger font-wight-bold"></strong>
+                    <input type="text" class="form-control shadow-none uprd-name" id="uprdName" name="uprdName">
+                    <label for="uprdName">Product Name</label>
+                    <strong id="uprdNameError" class="text-danger font-wight-bold"></strong>
                 </div>
                 <!-- For Product Image -->
                 <div class="form-floating mb-3">
-                    <input type="file" class="mt-3 form-control shadow-none prd-img" id="prdImage" name="prdImage">
-                    <label for="prdImage">Product Image</label><br>
-                    <strong id="prdImageError" class="text-danger font-wight-bold"></strong>
+                    <input type="file" class="mt-3 form-control shadow-none prd-img" id="uprdImage" name="uprdImage">
+                    <label for="uprdImage">Product Image</label><br>
+                    <strong id="uprdImageError" class="text-danger font-wight-bold"></strong>
                 </div>
                 <!-- For Product Price -->
                 <div class="form-floating mb-3">
-                    <input type="number" class="form-control shadow-none prd-price" id="prdPrice" name="prdPrice">
-                    <label for="prdPrice">Product Price</label>
-                    <strong id="prdPriceError" class="text-danger font-wight-bold"></strong>
+                    <input type="number" class="form-control shadow-none uprd-price" id="uprdPrice" name="uprdPrice">
+                    <label for="uprdPrice">Product Price</label>
+                    <strong id="uprdPriceError" class="text-danger font-wight-bold"></strong>
                 </div>
                 <!-- For Product Description -->
                 <div class="form-floating mb-3">
-                    <textarea class="form-control shadow-none prd-desc" id="prdDesc" name="prdDesc"></textarea>
-                    <label for="prdDesc">Product Description</label>
-                    <strong id="prdDescError" class="text-danger font-wight-bold"></strong>
+                    <textarea class="form-control shadow-none uprd-desc" id="uprdDesc" name="uprdDesc"></textarea>
+                    <label for="uprdDesc">Product Description</label>
+                    <strong id="uprdDescError" class="text-danger font-wight-bold"></strong>
                 </div>
             </div>
 
             <!-- modal footer -->
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="resetModal()">Close</button>
-                <input type="submit" value="Update" class="btn btn-primary add-btn" onclick="updateProduct()">
+                <input type="submit" value="Update" class="btn btn-primary add-btn" onclick="update()">
             </div>
         </div>
     </div>
