@@ -1,10 +1,9 @@
 viewProducts();
 
+const idRegex = /^[0-9]{5}$/;
+// const nameRegex = /^[A-Za-z]+$/;
 
-const idRegex = /^[0-9]{6}$/;
-const nameRegex = /^[A-Za-z]+$/;
-
-let base64, tmpImg;
+let base64, tmpImg='';
 
 let Products = [];
 
@@ -20,7 +19,7 @@ document.getElementById('uprdImage').addEventListener('change', function() {
     
     let reader = new FileReader();
     reader.addEventListener('load', () => {
-        base64 = reader.result;
+        tmpImg = reader.result;
     });
     reader.readAsDataURL(this.files[0]);
 });
@@ -97,26 +96,28 @@ function addProduct() {
             document.getElementById("prdDesc").style.border = "1px solid red";
             flag = false;
         }
-
     }
 
     if (!idRegex.test(pid) && pid != '') {
-        document.getElementById("prdIdError").innerHTML = "Id is invalid it must contain 6 digits only";
+        document.getElementById("prdIdError").innerHTML = "Id is invalid it must contain 5 digits only";
         document.getElementById("prdId").style.border = "1px solid red";
         flag = false;
     }
 
-    if (!nameRegex.test(pname) && pname != '') {
-        document.getElementById("prdNameError").innerHTML = "product name is invalid";
-        document.getElementById("prdName").style.border = "1px solid red";
-        flag = false;
-    }
+    // if (!nameRegex.test(pname) && pname != '') {
+    //     document.getElementById("prdNameError").innerHTML = "product name is invalid";
+    //     document.getElementById("prdName").style.border = "1px solid red";
+    //     flag = false;
+    // }
 
     if(flag) {
 
-        if(Products!="") {
+        if(localStorage.getItem('products')!=null) {
             Products = JSON.parse(localStorage.getItem('products'));
+            console.log("checking condition");
         }
+
+        console.log("add product");
 
         Products.push(new createProduct(pid, pname, base64, pprice, pdesc));
         localStorage.setItem('products', JSON.stringify(Products));
@@ -255,12 +256,10 @@ function updateProduct(prd) {
     prds.forEach(obj => {
         if(obj.pId==prd.pId) {
             targetObj = obj;
-            delete obj;
+            tmpImg = tmpImg==''?obj.pImage:tmpImg;
             return;
         }
     });
-
-    tmpImg = targetObj.pImage;
 }
 
 function update() {
@@ -268,9 +267,12 @@ function update() {
     let oldId = targetObj.pId;
     targetObj.pId = document.getElementById("uprdId").value;
     targetObj.pName = document.getElementById("uprdName").value;
-    targetObj.pImage = base64==''?tmpImg:base64;
+    targetObj.pImage = tmpImg;
     targetObj.pPrice = document.getElementById("uprdPrice").value;
     targetObj.pDesc = document.getElementById("uprdDesc").value;
+
+
+    console.log(targetObj.pImage);
 
     let prds = JSON.parse(localStorage.getItem('products'));
     for(let i=0; i<prds.length; i++) {
@@ -281,6 +283,14 @@ function update() {
     }
 
     localStorage.setItem('products', JSON.stringify(prds));
+
+    const toastTrigger = document.getElementById('updateBtn');
+    const toastLiveExample = document.getElementById('updateToast');
+    
+    if (toastTrigger) {
+        const toast = new bootstrap.Toast(toastLiveExample);
+        toast.show();
+    }
 
     reset(true);
 }

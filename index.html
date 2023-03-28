@@ -68,7 +68,7 @@
                     <div class="col">
                         <!-- Button trigger modal -->
                         <button type="button" class="btn my-4 btn-light new-prd" data-bs-toggle="modal" data-bs-target="#newPrdModal">
-                            New Product &nbsp;<i class="fa-solid fa-user"></i>
+                            New Product
                         </button>
                     </div>
                 </div>
@@ -182,7 +182,7 @@
             <!-- modal footer -->
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="resetModal()">Close</button>
-                <input type="submit" value="Update" class="btn btn-primary add-btn" onclick="update()">
+                <input type="submit" value="Update" id="updateBtn"  class="btn btn-primary update-btn" onclick="update()">
             </div>
         </div>
     </div>
@@ -220,6 +220,21 @@
             </div>
         </div>
     </div>
+
+  <!-- Toast message on product update -->
+  <div class="toast-container position-fixed bottom-0 end-0 p-3">
+    <div id="updateToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+            <h6>Toast Message</h6>
+            <button type="button" class="btn btn-close" data-bs-dismiss="toast" aria-label="Close" style="margin-left: 170px;"></button>
+        </div>
+        <div class="toast-body">
+            Product updated successfully.
+        </div>
+    </div>
+</div>
+
+
 
     <!-- container for table -->
         <div class="container" id="tblContainer">
