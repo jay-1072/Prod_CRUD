@@ -12,5 +12,34 @@ tr td div img {
 }
 
 tr:hover{
-    background-color: rgb(191, 219, 233);
+    background-color: rgb(200, 100, 200);;
+}
+
+ul.sort-menu li button:hover {
+    background-color: rgb(200, 100, 200);
+}
+
+
+@media screen and (max-width:768px) {
+
+    form.menu-form {
+        flex-direction: column;
+        margin-top: 20px;
+    }
+        
+    input.search-box, button.sort-btn {
+        max-width: 100%;
+        border: 2px solid black;
+    }
+
+    div.sort-drp-dwn {
+        max-width: 100%;
+        margin-top: 10px;
+    }
+
+    ul.dropdown-menu {
+        text-align: center;
+        width: 100%;
+    }
+
 }

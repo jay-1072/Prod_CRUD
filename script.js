@@ -130,7 +130,7 @@ function addProduct() {
             toast.show();
         }
 
-        setTimeout(function () { reset() }, 1000);
+        setTimeout(function () { reset() }, 600);
     }
 }
 
@@ -145,10 +145,10 @@ function viewProducts(pid, flag) {
         return;
     }
 
-    const tblContainer = document.getElementById('tblContainer');
+    // const tblContainer = document.getElementById('tblContainer');
 
-    const tbl = document.getElementById('prdTbl');
-    const body = document.body;
+    const tblBody = document.getElementById('tblBody');
+    // const body = document.body;
 
     for (let i = 0; i < prds.length; i++) {
 
@@ -158,7 +158,7 @@ function viewProducts(pid, flag) {
             continue;
         }
 
-        const tr = tbl.insertRow();
+        const tr = tblBody.insertRow();
 
         // td1
         const td1 = tr.insertCell();
@@ -234,37 +234,36 @@ function viewProducts(pid, flag) {
         td7.appendChild(deleteBtn);
     }
 
-    tblContainer.appendChild(tbl);
-    body.appendChild(tblContainer);
+    // tblContainer.appendChild(tbl);
+    // body.appendChild(tblContainer);
 }
 
 // update product functionality
-let targetObj;
+let targetObj, oldId;
 
 function updateProduct(prd) {
 
+    oldId = prd.pId;
     document.getElementById("uprdId").value = prd.pId;
     document.getElementById("uprdName").value = prd.pName;
     document.getElementById("uprdImage").innerHTML = prd.pImage;
     document.getElementById("uprdPrice").value = prd.pPrice;
     document.getElementById("uprdDesc").value = prd.pDesc;
-
-    let prds = JSON.parse(localStorage.getItem('products'));
-
-    prds.forEach(obj => {
-        if (obj.pId == prd.pId) {
-            targetObj = obj;
-            tmpImg = tmpImg == '' ? obj.pImage : tmpImg;
-            return;
-        }
-    });
 }
 
 function update() {
 
+    let prds = JSON.parse(localStorage.getItem('products'));
+
+    prds.forEach(obj => {
+        if (obj.pId == oldId) {
+            targetObj = obj;
+            tmpImg = tmpImg == '' ? obj.pImage : tmpImg;
+        }
+    });
+
     let flag = true;
 
-    let oldId = targetObj.pId;
     targetObj.pId = document.getElementById("uprdId").value;
     targetObj.pName = document.getElementById("uprdName").value;
     targetObj.pImage = tmpImg;
@@ -330,7 +329,7 @@ function update() {
             toast.show();
         }
 
-        setTimeout(function () { reset(true) }, 2000);
+        setTimeout(function () { reset(true) }, 490);
     }
 
 }
@@ -396,16 +395,16 @@ function searchProduct(input) {
 
     let prds = JSON.parse(localStorage.getItem('products'));
 
-    const tbl = document.getElementById('prdTbl');   
+    const tblBody = document.getElementById('tblBody');   
 
     for (let i = 0; i < prds.length; i++) {
 
         if (prds[i].pId === input) {
 
             flag = false;
-            tbl.innerHTML = '';
+            tblBody.innerHTML = '';
 
-            const tr = tbl.insertRow();
+            const tr = tblBody.insertRow();
 
             // td1
             const td1 = tr.insertCell();
@@ -487,4 +486,61 @@ function searchProduct(input) {
         alert('No product found');
     }
 
+}
+
+
+function sortById() {
+    let prds = JSON.parse(localStorage.getItem('products'));
+
+    prds.sort((prd1, prd2) => {
+        return Number.parseInt(prd1.pId) - Number.parseInt(prd2.pId);
+    })
+
+    localStorage.setItem('products', JSON.stringify(prds));
+
+    const tblBody = document.getElementById('tblBody');
+    tblBody.innerHTML = '';
+
+    viewProducts(true);
+}
+
+function sortByName() {
+    let prds = JSON.parse(localStorage.getItem('products'));
+
+    prds.sort((prd1, prd2) => {
+
+        let name1 = prd1.pName.toLowerCase(), name2 = prd2.pName.toLowerCase();
+
+        if(name1<name2) {
+            return -1;
+        }
+
+        if(name1>name2) {
+            return 1;
+        }
+
+        return 0;
+    })
+
+    localStorage.setItem('products', JSON.stringify(prds));
+
+    const tblBody = document.getElementById('tblBody');
+    tblBody.innerHTML = '';
+
+    viewProducts(true);
+}
+
+function sortByPrice() {
+    let prds = JSON.parse(localStorage.getItem('products'));
+
+    prds.sort((prd1, prd2) => {
+        return Number.parseInt(prd1.pPrice) - Number.parseInt(prd2.pPrice);
+    })
+
+    localStorage.setItem('products', JSON.stringify(prds));
+
+    const tblBody = document.getElementById('tblBody');
+    tblBody.innerHTML = '';
+
+    viewProducts(true);
 }

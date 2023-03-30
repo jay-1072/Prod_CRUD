@@ -30,12 +30,13 @@
 <body>
 
     <header>
+    <!-- <div class="" style="min-width: fit-content;"> -->
         <!-- navbar started -->
-        <nav class="navbar sticky-top navbar-expand-lg" style="background-color: rgb(200, 100, 200);">
+        <nav class="navbar sticky-top navbar-expand-lg" style="background-color: rgb(200, 100, 200); max-width: 100%;">
             <div class="container-fluid">
                 <!-- navbar brand -->
                 <a class="navbar-brand" href="#">
-                    CRUD
+                    Product Management System
                 </a>
 
                 <!-- collapse button on small screen -->
@@ -46,17 +47,26 @@
 
                 <!-- nav links -->
                 <div class="collapse navbar-collapse" id="navitems">
-                    <div class="navbar-nav ms-auto">
+                    <div class="navbar-nav ms-auto w-auto">
                     </div>
-                    <form class="d-flex" role="search">
-                        <input class="form-control me-2" type="search" placeholder="Enter product id" aria-label="Search" onkeyup="searchProduct(this.value)">
-                        <!-- <button class="btn btn-outline-primary" type="submit" onclick="searchProduct()">Search</button> -->
+                    <form class="d-flex menu-form" role="search">
+                        <input class="form-control search-box me-2" type="search" placeholder="Search product by id" aria-label="Search" onkeyup="searchProduct(this.value)">
+                        <div class="dropdown sort-drp-dwn">
+                            <button type="button" class="btn dropdown-toggle bg-light w-100 sort-btn" data-bs-toggle="dropdown" aria-expanded="false">Sort Product By</button>
+        
+                            <ul class="dropdown-menu">
+                                <li><button type="button" class="btn dropdown-item" onclick="sortById()">Product Id</button></li>
+                                <li><button type="button" class="btn dropdown-item" onclick="sortByName()">Product Name</button></li>
+                                <li><button type="button" class="btn dropdown-item" onclick="sortByPrice()">Product Price</button></li>
+                            </ul>
+                        </div>
                     </form>
                 </div>
             </div>
         </nav>
         <!-- navbar ended -->
     </header>
+    <!-- </div> -->
 
 <!-- main div started -->
     <div class="main">
@@ -219,7 +229,7 @@
 
 
     <!-- container for table -->
-        <div class="container" id="tblContainer">
+        <div class="container" id="tblContainer" style="overflow: auto;">
             <!-- table started -->
             <table class="table" id="prdTbl">
                 <thead>
@@ -232,6 +242,9 @@
                         <th scope="col" colspan="2" class="text-center">Action</th>
                     </tr>
                 </thead>
+                <tbody id="tblBody">
+
+                </tbody>
             </table>
             <!-- table ended -->
         </div>
