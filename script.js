@@ -131,8 +131,9 @@ function addProduct() {
         if (toastTrigger) {
             const toast = new bootstrap.Toast(toastLiveExample);
             toast.show();
-            reset();
         }
+
+        setTimeout(function(){reset()}, 1000);
     }
 }
 
@@ -288,11 +289,12 @@ function update() {
     const toastLiveExample = document.getElementById('updateToast');
     
     if (toastTrigger) {
+        console.log("update toast");
         const toast = new bootstrap.Toast(toastLiveExample);
         toast.show();
     }
 
-    reset(true);
+    setTimeout(function() {reset(true)}, 2000);
 }
 
 // delete product functionality
@@ -346,5 +348,6 @@ function reset(flag) {
         document.getElementById("prdImage").value = "";
         document.getElementById("prdPrice").value = "";
         document.getElementById("prdDesc").value = "";
+        window.location.reload();
     }
 }
