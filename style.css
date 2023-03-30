@@ -3,6 +3,14 @@ button.new-prd {
     font-weight: 500;
 }
 
+button.new-prd:hover {
+    background-color: rgb(200, 100, 200);
+}
+
 tr td div img {
     vertical-align: middle;
+}
+
+tr:hover{
+    background-color: rgb(191, 219, 233);
 }

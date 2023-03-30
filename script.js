@@ -389,3 +389,102 @@ function reset(flag) {
         window.location.reload();
     }
 }
+
+function searchProduct(input) {
+
+    let flag = true;
+
+    let prds = JSON.parse(localStorage.getItem('products'));
+
+    const tbl = document.getElementById('prdTbl');   
+
+    for (let i = 0; i < prds.length; i++) {
+
+        if (prds[i].pId === input) {
+
+            flag = false;
+            tbl.innerHTML = '';
+
+            const tr = tbl.insertRow();
+
+            // td1
+            const td1 = tr.insertCell();
+            td1.appendChild(document.createTextNode(prds[i].pId));
+            td1.setAttribute('class', 'align-middle')
+
+            // td2
+            const td2 = tr.insertCell();
+            td2.appendChild(document.createTextNode(prds[i].pName));
+            td2.setAttribute('class', 'align-middle')
+
+            // td3
+            const td3 = tr.insertCell();
+
+            let prd_img_div = document.createElement('div');
+            prd_img_div.setAttribute('style', 'width:100px;');
+            prd_img_div.setAttribute('class', 'object-fit-fill');
+
+            let prd_img = document.createElement('img');
+            prd_img.setAttribute('style', 'max-width: 100%; heigth:auto;');
+            prd_img.setAttribute('src', `${prds[i].pImage}`);
+
+
+            prd_img_div.appendChild(prd_img);
+            td3.appendChild(prd_img_div);
+
+            // td4
+            const td4 = tr.insertCell();
+            td4.appendChild(document.createTextNode(prds[i].pPrice));
+            td4.setAttribute('class', 'align-middle');
+
+            // td5
+            const td5 = tr.insertCell();
+            td5.appendChild(document.createTextNode(prds[i].pDesc));
+            td5.setAttribute('class', 'align-middle')
+
+            // td6 for update button
+
+            const td6 = tr.insertCell();
+            td6.setAttribute('class', 'align-middle');
+
+            let updateBtn = document.createElement('button');
+            updateBtn.setAttribute('class', 'btn btn-light text-center w-75');
+            updateBtn.setAttribute('data-bs-toggle', 'modal');
+            updateBtn.setAttribute('data-bs-target', '#updatePrdModal');
+
+            updateBtn.onclick = function () {
+                updateProduct(prds[i]);
+            }
+
+            let updateIcon = document.createElement('i');
+            updateIcon.setAttribute('class', 'fa-solid fa-pen-to-square');
+
+
+            updateBtn.appendChild(updateIcon);
+            td6.appendChild(updateBtn);
+
+            // td7 for delete button
+
+            const td7 = tr.insertCell();
+            td7.setAttribute('class', 'align-middle');
+
+            let deleteBtn = document.createElement('button');
+            deleteBtn.setAttribute('class', 'btn btn-light text-center w-75');
+            deleteBtn.onclick = function () {
+                deleteProduct(prds[i]);
+            }
+
+            let deleteIcon = document.createElement('i');
+            deleteIcon.setAttribute('class', 'fa-solid fa-trash');
+
+            deleteBtn.appendChild(deleteIcon);
+            td7.appendChild(deleteBtn);
+        }
+        
+    }
+
+    if(flag && input.length>=5) {
+        alert('No product found');
+    }
+
+}
