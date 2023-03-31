@@ -1,12 +1,15 @@
+// load products stored in local storage when script will load
 viewProducts();
 
+// Regex for product id.
 const idRegex = /^[0-9]{5}$/;
-// const nameRegex = /^[A-Za-z]+$/;
 
 let base64, tmpImg = '';
 
+// This array will store products in object form.
 let Products = [];
 
+// Convert image into base64 image.
 document.getElementById('prdImage').addEventListener('change', function () {
     let reader = new FileReader();
     reader.addEventListener('load', () => {
@@ -15,8 +18,8 @@ document.getElementById('prdImage').addEventListener('change', function () {
     reader.readAsDataURL(this.files[0]);
 });
 
+// When user update product image convert it into base64 image.
 document.getElementById('uprdImage').addEventListener('change', function () {
-
     let reader = new FileReader();
     reader.addEventListener('load', () => {
         tmpImg = reader.result;
@@ -24,6 +27,7 @@ document.getElementById('uprdImage').addEventListener('change', function () {
     reader.readAsDataURL(this.files[0]);
 });
 
+// function constructor for add new product
 function createProduct(pId, pName, pImage, pPrice, pDesc) {
     this.pId = pId;
     this.pName = pName;
@@ -38,6 +42,7 @@ const orig_pimage = document.getElementById("prdImage");
 const orig_pprice = document.getElementById("prdPrice");
 const orig_pdesc = document.getElementById("prdDesc");
 
+// Add new product function
 function addProduct() {
 
     let flag = true;
@@ -104,14 +109,9 @@ function addProduct() {
         flag = false;
     }
 
-    // if (!nameRegex.test(pname) && pname != '') {
-    //     document.getElementById("prdNameError").innerHTML = "product name is invalid";
-    //     document.getElementById("prdName").style.border = "1px solid red";
-    //     flag = false;
-    // }
-
     if (flag) {
 
+        // Very first time null will be return here.
         if (localStorage.getItem('products') != null) {
             Products = JSON.parse(localStorage.getItem('products'));
         }
@@ -132,110 +132,6 @@ function addProduct() {
 
         setTimeout(function () { reset() }, 600);
     }
-}
-
-
-// view product functionality
-
-function viewProducts(pid, flag) {
-
-    let prds = JSON.parse(localStorage.getItem('products'));
-
-    if (prds == null) {
-        return;
-    }
-
-    // const tblContainer = document.getElementById('tblContainer');
-
-    const tblBody = document.getElementById('tblBody');
-    // const body = document.body;
-
-    for (let i = 0; i < prds.length; i++) {
-
-        let prdData = Object.values(prds[i]);
-
-        if (pid != prdData[0] && flag) {
-            continue;
-        }
-
-        const tr = tblBody.insertRow();
-
-        // td1
-        const td1 = tr.insertCell();
-        td1.appendChild(document.createTextNode(prdData[0]));
-        td1.setAttribute('class', 'align-middle')
-
-        // td2
-        const td2 = tr.insertCell();
-        td2.appendChild(document.createTextNode(prdData[1]));
-        td2.setAttribute('class', 'align-middle')
-
-        // td3
-        const td3 = tr.insertCell();
-
-        let prd_img_div = document.createElement('div');
-        prd_img_div.setAttribute('style', 'width:100px;');
-        prd_img_div.setAttribute('class', 'object-fit-fill');
-
-        let prd_img = document.createElement('img');
-        prd_img.setAttribute('style', 'max-width: 100%; heigth:auto;');
-        prd_img.setAttribute('src', `${prdData[2]}`);
-
-
-        prd_img_div.appendChild(prd_img);
-        td3.appendChild(prd_img_div);
-
-        // td4
-        const td4 = tr.insertCell();
-        td4.appendChild(document.createTextNode(prdData[3]));
-        td4.setAttribute('class', 'align-middle');
-
-        // td5
-        const td5 = tr.insertCell();
-        td5.appendChild(document.createTextNode(prdData[4]));
-        td5.setAttribute('class', 'align-middle')
-
-        // td6 for update button
-
-        const td6 = tr.insertCell();
-        td6.setAttribute('class', 'align-middle');
-
-        let updateBtn = document.createElement('button');
-        updateBtn.setAttribute('class', 'btn btn-light text-center w-75');
-        updateBtn.setAttribute('data-bs-toggle', 'modal');
-        updateBtn.setAttribute('data-bs-target', '#updatePrdModal');
-
-        updateBtn.onclick = function () {
-            updateProduct(prds[i]);
-        }
-
-        let updateIcon = document.createElement('i');
-        updateIcon.setAttribute('class', 'fa-solid fa-pen-to-square');
-
-
-        updateBtn.appendChild(updateIcon);
-        td6.appendChild(updateBtn);
-
-        // td7 for delete button
-
-        const td7 = tr.insertCell();
-        td7.setAttribute('class', 'align-middle');
-
-        let deleteBtn = document.createElement('button');
-        deleteBtn.setAttribute('class', 'btn btn-light text-center w-75');
-        deleteBtn.onclick = function () {
-            deleteProduct(prds[i]);
-        }
-
-        let deleteIcon = document.createElement('i');
-        deleteIcon.setAttribute('class', 'fa-solid fa-trash');
-
-        deleteBtn.appendChild(deleteIcon);
-        td7.appendChild(deleteBtn);
-    }
-
-    // tblContainer.appendChild(tbl);
-    // body.appendChild(tblContainer);
 }
 
 // update product functionality
@@ -348,46 +244,110 @@ function deleteProduct(prd) {
     window.location.reload();
 }
 
+// view product functionality
 
-function resetModal() {
+function viewProducts(pid, flag) {
 
-    document.getElementById("prdIdError").innerHTML = "";
-    document.getElementById("prdId").style = orig_pid;
+    let prds = JSON.parse(localStorage.getItem('products'));
 
-    document.getElementById("prdNameError").innerHTML = "";
-    document.getElementById("prdName").style = orig_pname;
+    if (prds == null) {
+        return;
+    }
 
-    document.getElementById("prdImageError").innerHTML = "";
-    document.getElementById("prdImage").style = orig_pimage;
+    // const tblContainer = document.getElementById('tblContainer');
 
-    document.getElementById("prdPriceError").innerHTML = "";
-    document.getElementById("prdPrice").style = orig_pprice;
+    const tblBody = document.getElementById('tblBody');
+    // const body = document.body;
 
-    document.getElementById("prdDescError").innerHTML = "";
-    document.getElementById("prdDesc").style = orig_pdesc;
+    for (let i = 0; i < prds.length; i++) {
 
-    reset();
+        let prdData = Object.values(prds[i]);
+
+        if (pid != prdData[0] && flag) {
+            continue;
+        }
+
+        const tr = tblBody.insertRow();
+
+        // td1
+        const td1 = tr.insertCell();
+        td1.appendChild(document.createTextNode(prdData[0]));
+        td1.setAttribute('class', 'align-middle')
+
+        // td2
+        const td2 = tr.insertCell();
+        td2.appendChild(document.createTextNode(prdData[1]));
+        td2.setAttribute('class', 'align-middle')
+
+        // td3
+        const td3 = tr.insertCell();
+
+        let prd_img_div = document.createElement('div');
+        prd_img_div.setAttribute('style', 'width:100px;');
+        prd_img_div.setAttribute('class', 'object-fit-fill');
+
+        let prd_img = document.createElement('img');
+        prd_img.setAttribute('style', 'max-width: 100%; heigth:auto;');
+        prd_img.setAttribute('src', `${prdData[2]}`);
+
+
+        prd_img_div.appendChild(prd_img);
+        td3.appendChild(prd_img_div);
+
+        // td4
+        const td4 = tr.insertCell();
+        td4.appendChild(document.createTextNode(prdData[3]));
+        td4.setAttribute('class', 'align-middle');
+
+        // td5
+        const td5 = tr.insertCell();
+        td5.appendChild(document.createTextNode(prdData[4]));
+        td5.setAttribute('class', 'align-middle')
+
+        // td6 for update button
+
+        const td6 = tr.insertCell();
+        td6.setAttribute('class', 'align-middle');
+
+        let updateBtn = document.createElement('button');
+        updateBtn.setAttribute('class', 'btn btn-light text-center w-75');
+        updateBtn.setAttribute('data-bs-toggle', 'modal');
+        updateBtn.setAttribute('data-bs-target', '#updatePrdModal');
+
+        updateBtn.onclick = function () {
+            updateProduct(prds[i]);
+        }
+
+        let updateIcon = document.createElement('i');
+        updateIcon.setAttribute('class', 'fa-solid fa-pen-to-square');
+
+
+        updateBtn.appendChild(updateIcon);
+        td6.appendChild(updateBtn);
+
+        // td7 for delete button
+
+        const td7 = tr.insertCell();
+        td7.setAttribute('class', 'align-middle');
+
+        let deleteBtn = document.createElement('button');
+        deleteBtn.setAttribute('class', 'btn btn-light text-center w-75');
+        deleteBtn.onclick = function () {
+            deleteProduct(prds[i]);
+        }
+
+        let deleteIcon = document.createElement('i');
+        deleteIcon.setAttribute('class', 'fa-solid fa-trash');
+
+        deleteBtn.appendChild(deleteIcon);
+        td7.appendChild(deleteBtn);
+    }
+
+    // tblContainer.appendChild(tbl);
+    // body.appendChild(tblContainer);
 }
 
-function reset(flag) {
-
-    if (flag) {
-        document.getElementById("uprdId").value = "";
-        document.getElementById("uprdName").value = "";
-        document.getElementById("uprdImage").value = "";
-        document.getElementById("uprdPrice").value = "";
-        document.getElementById("uprdDesc").value = "";
-        window.location.reload();
-    }
-    else {
-        document.getElementById("prdId").value = "";
-        document.getElementById("prdName").value = "";
-        document.getElementById("prdImage").value = "";
-        document.getElementById("prdPrice").value = "";
-        document.getElementById("prdDesc").value = "";
-        window.location.reload();
-    }
-}
+// Search Product functionality
 
 function searchProduct(input) {
 
@@ -488,6 +448,9 @@ function searchProduct(input) {
 
 }
 
+// Sort product functionality
+
+// sort by product id
 
 function sortById() {
     let prds = JSON.parse(localStorage.getItem('products'));
@@ -503,6 +466,8 @@ function sortById() {
 
     viewProducts(true);
 }
+
+// sort by product name
 
 function sortByName() {
     let prds = JSON.parse(localStorage.getItem('products'));
@@ -530,6 +495,8 @@ function sortByName() {
     viewProducts(true);
 }
 
+// sort by product price
+
 function sortByPrice() {
     let prds = JSON.parse(localStorage.getItem('products'));
 
@@ -545,6 +512,70 @@ function sortByPrice() {
     viewProducts(true);
 }
 
+// resetting modal
+
+function resetModal(flag) {
+
+    if(flag) {
+        document.getElementById("uprdIdError").innerHTML = "";
+        document.getElementById("uprdId").style = orig_pid;
+
+        document.getElementById("uprdNameError").innerHTML = "";
+        document.getElementById("uprdName").style = orig_pname;
+
+        document.getElementById("uprdImageError").innerHTML = "";
+        document.getElementById("uprdImage").style = orig_pimage;
+
+        document.getElementById("uprdPriceError").innerHTML = "";
+        document.getElementById("uprdPrice").style = orig_pprice;
+
+        document.getElementById("uprdDescError").innerHTML = "";
+        document.getElementById("uprdDesc").style = orig_pdesc;
+    }
+    else {
+        document.getElementById("prdIdError").innerHTML = "";
+        document.getElementById("prdId").style = orig_pid;
+
+        document.getElementById("prdNameError").innerHTML = "";
+        document.getElementById("prdName").style = orig_pname;
+
+        document.getElementById("prdImageError").innerHTML = "";
+        document.getElementById("prdImage").style = orig_pimage;
+
+        document.getElementById("prdPriceError").innerHTML = "";
+        document.getElementById("prdPrice").style = orig_pprice;
+
+        document.getElementById("prdDescError").innerHTML = "";
+        document.getElementById("prdDesc").style = orig_pdesc;
+
+        reset();
+    }
+    
+}
+
+// clear modal after add or update
+
+function reset(flag) {
+
+    if (flag) {
+        document.getElementById("uprdId").value = "";
+        document.getElementById("uprdName").value = "";
+        document.getElementById("uprdImage").value = "";
+        document.getElementById("uprdPrice").value = "";
+        document.getElementById("uprdDesc").value = "";
+        window.location.reload();
+    }
+    else {
+        document.getElementById("prdId").value = "";
+        document.getElementById("prdName").value = "";
+        document.getElementById("prdImage").value = "";
+        document.getElementById("prdPrice").value = "";
+        document.getElementById("prdDesc").value = "";
+        window.location.reload();
+    }
+}
+
+// When clicking outside menu button it will close menu
 
 var navitems = document.getElementById('navitems'),
 menuBtn = document.getElementById('manuBtn'),
@@ -556,7 +587,6 @@ function hide_menu(evt) {
 
     evt = evt || window.event;						  // get window.event if evt is falsy (IE)
     var targetElement = evt.target || evt.srcElement; // get srcElement if target is falsy (IE)
-
 
     if((targetElement === menuBtn || targetElement === menuBtn.parentElement) && (menuStatus === true)) {
         navitems.style.display = 'none';

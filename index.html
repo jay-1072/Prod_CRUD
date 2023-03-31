@@ -15,7 +15,6 @@
         integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
 
     <!-- bootstrap script -->
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous">
         </script>
@@ -24,23 +23,23 @@
     <link rel="stylesheet" type="text/css" href="style.css">
 
     <!-- my script -->
-    <script defer src="script.js"></script>
+    <script defer type="text/javascript" src="script.js"></script>
 </head>
 
 <body>
 
+    <!-- header started -->
     <header>
-    <!-- <div class="" style="min-width: fit-content;"> -->
         <!-- navbar started -->
-        <nav class="navbar sticky-top navbar-expand-lg" style="background-color: rgb(200, 100, 200); max-width: 100%;">
+        <nav class="navbar sticky-top navbar-expand-lg" style="background-color: rgb(200, 100, 200); min-width: 100%;">
             <div class="container-fluid">
                 <!-- navbar brand -->
-                <a class="navbar-brand" href="#" style="font-size: 100%;" >
+                <a class="navbar-brand" href="#" style="font-size: 100%; color: white; font-weight: 500;">
                     Product Management System
                 </a>
 
                 <!-- collapse button on small screen -->
-                <button type="button"  class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navitems"
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navitems"
                     aria-controls="navitems" aria-expanded="false" aria-label="Toggle navigation">
                     <span id="manuBtn" class="navbar-toggler-icon"></span>
                 </button>
@@ -50,14 +49,19 @@
                     <div class="navbar-nav ms-auto w-auto">
                     </div>
                     <form class="d-flex menu-form hidden_menu" id="menuContainer" role="search">
-                        <input class="form-control search-box me-2" type="search" placeholder="Search product by id" aria-label="Search" onkeyup="searchProduct(this.value)">
+                        <input class="form-control search-box me-2" type="search" placeholder="Search product by id"
+                            aria-label="Search" onkeyup="searchProduct(this.value)">
                         <div class="dropdown sort-drp-dwn">
-                            <button type="button" class="btn dropdown-toggle bg-light w-100 sort-btn" data-bs-toggle="dropdown" aria-expanded="false">Sort Product By</button>
-        
+                            <button type="button" class="btn dropdown-toggle bg-light w-100 sort-btn"
+                                data-bs-toggle="dropdown" aria-expanded="false">Sort Product By</button>
+
                             <ul class="dropdown-menu">
-                                <li><button type="button" class="btn dropdown-item" onclick="sortById()">Product Id</button></li>
-                                <li><button type="button" class="btn dropdown-item" onclick="sortByName()">Product Name</button></li>
-                                <li><button type="button" class="btn dropdown-item" onclick="sortByPrice()">Product Price</button></li>
+                                <li><button type="button" class="btn dropdown-item" onclick="sortById()">Product
+                                        Id</button></li>
+                                <li><button type="button" class="btn dropdown-item" onclick="sortByName()">Product
+                                        Name</button></li>
+                                <li><button type="button" class="btn dropdown-item" onclick="sortByPrice()">Product
+                                        Price</button></li>
                             </ul>
                         </div>
                     </form>
@@ -66,197 +70,216 @@
         </nav>
         <!-- navbar ended -->
     </header>
-    <!-- </div> -->
+    <!-- header ended -->
 
-<!-- main div started -->
+    <!-- main div started -->
     <div class="main">
 
-    <!-- Add new employee button started -->
+        <!-- Add new product button started -->
         <div class="new-prd-btn">
             <div class="container">
                 <div class="row">
                     <div class="col">
                         <!-- Button trigger modal -->
-                        <button type="button" class="btn my-4 btn-outline-secondary new-prd" data-bs-toggle="modal" data-bs-target="#newPrdModal">
+                        <button type="button" class="btn my-4 btn-outline-secondary new-prd" data-bs-toggle="modal"
+                            data-bs-target="#newPrdModal">
                             New Product
                         </button>
                     </div>
                 </div>
             </div>
-    <!-- Add new employee button started -->
+            <!-- Add new product button ended -->
 
-    <!-- Modal for new product started -->
+            <!-- Modal for new product started -->
 
-    <div class="modal fade" id="newPrdModal" tabindex="-1" aria-hidden="true" aria-labelledby="newPrdModalLabel">
-        <!-- modal dialog -->
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <!-- modal header -->
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="newPrdModalLabel" style="padding-left: 170px;">Add New Product</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="resetModal()"></button>
-                </div>
+            <div class="modal fade" id="newPrdModal" tabindex="-1" aria-hidden="true"
+                aria-labelledby="newPrdModalLabel">
+                <!-- modal dialog -->
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <!-- modal header -->
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="newPrdModalLabel" style="padding-left: 170px;">Add New
+                                Product</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                                onclick="resetModal()"></button>
+                        </div>
 
-                <!-- modal body -->
-                <div class="modal-body">
-                    <!-- for Product Id -->
-                    <div class="mb-3">
-                        <label class="mb-1" for="prdId">Product Id</label>
-                        <input type="text" class="form-control shadow-none prd-id" id="prdId" name="prdId">
-                        <strong id="prdIdError" class="text-danger font-wight-bold"></strong>
+                        <!-- modal body -->
+                        <div class="modal-body">
+                            <!-- for Product Id -->
+                            <div class="mb-3">
+                                <label class="mb-1" for="prdId">Product Id</label>
+                                <input type="text" class="form-control shadow-none prd-id" id="prdId" name="prdId">
+                                <strong id="prdIdError" class="text-danger font-wight-bold"></strong>
+                            </div>
+                            <!-- for Product Name -->
+                            <div class="mb-3">
+                                <label class="mb-1" for="prdName">Product Name</label>
+                                <input type="text" class="form-control shadow-none prd-name" id="prdName"
+                                    name="prdName">
+                                <strong id="prdNameError" class="text-danger font-wight-bold"></strong>
+                            </div>
+                            <!-- For Product Image -->
+                            <div class="mb-3">
+                                <label class="mb-1" for="prdImage">Product Image</label>
+                                <input type="file" class="form-control shadow-none prd-img" id="prdImage"
+                                    name="prdImage">
+                                <strong id="prdImageError" class="text-danger font-wight-bold"></strong>
+                            </div>
+                            <!-- For Product Price -->
+                            <div class="mb-3">
+                                <label class="mb-1" for="prdPrice">Product Price</label>
+                                <input type="text" class="form-control shadow-none prd-price" id="prdPrice"
+                                    name="prdPrice">
+                                <strong id="prdPriceError" class="text-danger font-wight-bold"></strong>
+                            </div>
+                            <!-- For Product Description -->
+                            <div class="mb-3">
+                                <label class="mb-1" for="prdDesc">Product Description</label>
+                                <textarea rows="5" class="form-control shadow-none prd-desc" id="prdDesc" name="prdDesc"
+                                    style="height: 100%; resize: none;"></textarea>
+                                <strong id="prdDescError" class="text-danger font-wight-bold"></strong>
+                            </div>
+                        </div>
+
+                        <!-- modal footer -->
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                                onclick="resetModal()">Close</button>
+                            <input type="submit" value="Add" class="btn btn-primary add-btn" id="liveToastBtn"
+                                onclick="addProduct()">
+                        </div>
                     </div>
-                    <!-- for Product Name -->
-                    <div class="mb-3">
-                        <label class="mb-1" for="prdName">Product Name</label>
-                        <input type="text" class="form-control shadow-none prd-name" id="prdName" name="prdName">
-                        <strong id="prdNameError" class="text-danger font-wight-bold"></strong>
+                </div>
+            </div>
+
+            <!-- Modal for new product ended -->
+
+            <!-- Toast message on add product -->
+            <div class="toast-container position-fixed bottom-0 end-0 p-3">
+                <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                    <div class="toast-header">
+                        <h6>Toast Message</h6>
+                        <button type="button" class="btn btn-close" data-bs-dismiss="toast" aria-label="Close"
+                            style="margin-left: 170px;"></button>
                     </div>
-                    <!-- For Product Image -->
-                    <div class="mb-3">
-                        <label class="mb-1" for="prdImage">Product Image</label>
-                        <input type="file" class="form-control shadow-none prd-img" id="prdImage" name="prdImage">
-                        <strong id="prdImageError" class="text-danger font-wight-bold"></strong>
-                    </div>
-                    <!-- For Product Price -->
-                    <div class="mb-3">
-                        <label class="mb-1" for="prdPrice">Product Price</label>
-                        <input type="text" class="form-control shadow-none prd-price" id="prdPrice" name="prdPrice">    
-                        <strong id="prdPriceError" class="text-danger font-wight-bold"></strong>
-                    </div>
-                    <!-- For Product Description -->
-                    <div class="mb-3">
-                        <label class="mb-1" for="prdDesc">Product Description</label>
-                        <textarea rows="5" class="form-control shadow-none prd-desc" id="prdDesc" name="prdDesc" style="height: 100%; resize: none;"></textarea>
-                        <strong id="prdDescError" class="text-danger font-wight-bold"></strong>
+                    <div class="toast-body">
+                        Product added successfully.
                     </div>
                 </div>
-
-                <!-- modal footer -->
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="resetModal()">Close</button>
-                    <input type="submit" value="Add" class="btn btn-primary add-btn" id="liveToastBtn" onclick="addProduct()">
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal for new product ended -->
-
-
-<!-- Modal for update product started -->
-
-<div class="modal fade" id="updatePrdModal" tabindex="-1" aria-hidden="true" aria-labelledby="updatePrdModalLabel">
-    <!-- modal dialog -->
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <!-- modal header -->
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="updatePrdModalLabel" style="padding-left: 170px;">Update Product</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="resetModal()"></button>
             </div>
 
-            <!-- modal body -->
-            <div class="modal-body">
-                <!-- for Product Id -->
-                <div class="mb-3">
-                    <label class="mb-1" for="uprdId">Product Id</label>
-                    <input type="text" class="form-control shadow-none uprd-id" id="uprdId" name="uprdId">      
-                    <strong id="uprdIdError" class="text-danger font-wight-bold"></strong>
-                </div>
-                <!-- for Product Name -->
-                <div class="mb-3">
-                    <label class="mb-1" for="uprdName">Product Name</label>
-                    <input type="text" class="form-control shadow-none uprd-name" id="uprdName" name="uprdName">   
-                    <strong id="uprdNameError" class="text-danger font-wight-bold"></strong>
-                </div>
-                <!-- For Product Image -->
-                <div class="mb-3">
-                    <label class="mb-1" for="uprdImage">Product Image</label>
-                    <input type="file" class="form-control shadow-none prd-img" id="uprdImage" name="uprdImage"> 
-                    <strong id="uprdImageError" class="text-danger font-wight-bold"></strong>
-                </div>
-                <!-- For Product Price -->
-                <div class="mb-3">
-                    <label class="mb-1" for="uprdPrice">Product Price</label>
-                    <input type="text" class="form-control shadow-none uprd-price" id="uprdPrice" name="uprdPrice">  
-                    <strong id="uprdPriceError" class="text-danger font-wight-bold"></strong>
-                </div>
-                <!-- For Product Description -->
-                <div class="mb-3">
-                    <label class="mb-1" for="uprdDesc">Product Description</label>
-                    <textarea rows="5" class="form-control shadow-none uprd-desc" id="uprdDesc" name="uprdDesc" style="height: 100%; resize: none;"></textarea>
-                    <strong id="uprdDescError" class="text-danger font-wight-bold"></strong>
+
+            <!-- Modal for update product started -->
+
+            <div class="modal fade" id="updatePrdModal" tabindex="-1" aria-hidden="true"
+                aria-labelledby="updatePrdModalLabel">
+                <!-- modal dialog -->
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <!-- modal header -->
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="updatePrdModalLabel" style="padding-left: 170px;">Update
+                                Product</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                                onclick="resetModal(true)"></button>
+                        </div>
+
+                        <!-- modal body -->
+                        <div class="modal-body">
+                            <!-- for Product Id -->
+                            <div class="mb-3">
+                                <label class="mb-1" for="uprdId">Product Id</label>
+                                <input type="text" class="form-control shadow-none uprd-id" id="uprdId" name="uprdId">
+                                <strong id="uprdIdError" class="text-danger font-wight-bold"></strong>
+                            </div>
+                            <!-- for Product Name -->
+                            <div class="mb-3">
+                                <label class="mb-1" for="uprdName">Product Name</label>
+                                <input type="text" class="form-control shadow-none uprd-name" id="uprdName"
+                                    name="uprdName">
+                                <strong id="uprdNameError" class="text-danger font-wight-bold"></strong>
+                            </div>
+                            <!-- For Product Image -->
+                            <div class="mb-3">
+                                <label class="mb-1" for="uprdImage">Product Image</label>
+                                <input type="file" class="form-control shadow-none prd-img" id="uprdImage"
+                                    name="uprdImage">
+                                <strong id="uprdImageError" class="text-danger font-wight-bold"></strong>
+                            </div>
+                            <!-- For Product Price -->
+                            <div class="mb-3">
+                                <label class="mb-1" for="uprdPrice">Product Price</label>
+                                <input type="text" class="form-control shadow-none uprd-price" id="uprdPrice"
+                                    name="uprdPrice">
+                                <strong id="uprdPriceError" class="text-danger font-wight-bold"></strong>
+                            </div>
+                            <!-- For Product Description -->
+                            <div class="mb-3">
+                                <label class="mb-1" for="uprdDesc">Product Description</label>
+                                <textarea rows="5" class="form-control shadow-none uprd-desc" id="uprdDesc"
+                                    name="uprdDesc" style="height: 100%; resize: none;"></textarea>
+                                <strong id="uprdDescError" class="text-danger font-wight-bold"></strong>
+                            </div>
+                        </div>
+
+                        <!-- modal footer -->
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                                onclick="resetModal(true)">Close</button>
+                            <input type="submit" value="Update" class="btn btn-primary update-btn" id="updateBtn"
+                                onclick="update()">
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <!-- modal footer -->
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="resetModal()">Close</button>
-                <input type="submit" value="Update" class="btn btn-primary update-btn" id="updateBtn" onclick="update()">
+            <!-- Modal for update product ended -->
+
+            <!-- Toast message on product update -->
+            <div class="toast-container position-fixed bottom-0 end-0 p-3">
+                <div id="updateToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                    <div class="toast-header">
+                        <h6>Toast Message</h6>
+                        <button type="button" class="btn btn-close" data-bs-dismiss="toast" aria-label="Close"
+                            style="margin-left: 170px;"></button>
+                    </div>
+                    <div class="toast-body">
+                        Product updated successfully.
+                    </div>
+                </div>
+            </div>
+
+            <!-- container for table -->
+            <div class="container" id="tblContainer" style="overflow: auto;">
+                <!-- table started -->
+                <table class="table" id="prdTbl">
+                    <thead>
+                        <tr class="table-dark">
+                            <th scope="col">Product ID</th>
+                            <th scope="col">Product Name</th>
+                            <th scope="col">Product Image</th>
+                            <th scope="col">Product Price</th>
+                            <th scope="col">Product Description</th>
+                            <th scope="col" colspan="2" class="text-center">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tblBody">
+
+                    </tbody>
+                </table>
+                <!-- table ended -->
             </div>
         </div>
-    </div>
-</div>
+    <!-- main div ended -->
 
-<!-- Modal for update product ended -->
-
-    <!-- Toast message on form submit -->
-    <div class="toast-container position-fixed bottom-0 end-0 p-3">
-        <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-            <div class="toast-header">
-                <h6>Toast Message</h6>
-                <button type="button" class="btn btn-close" data-bs-dismiss="toast" aria-label="Close" style="margin-left: 170px;"></button>
-            </div>
-            <div class="toast-body">
-                Product added successfully.
-            </div>
-        </div>
-    </div>
-
-  <!-- Toast message on product update -->
-  <div class="toast-container position-fixed bottom-0 end-0 p-3">
-    <div id="updateToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-        <div class="toast-header">
-            <h6>Toast Message</h6>
-            <button type="button" class="btn btn-close" data-bs-dismiss="toast" aria-label="Close" style="margin-left: 170px;"></button>
-        </div>
-        <div class="toast-body">
-            Product updated successfully.
-        </div>
-    </div>
-</div>
-
-
-
-    <!-- container for table -->
-        <div class="container" id="tblContainer" style="overflow: auto;">
-            <!-- table started -->
-            <table class="table" id="prdTbl">
-                <thead>
-                    <tr  class="table-dark">
-                        <th scope="col">Product ID</th>
-                        <th scope="col">Product Name</th>
-                        <th scope="col">Product Image</th>
-                        <th scope="col">Product Price</th>
-                        <th scope="col">Product Description</th>
-                        <th scope="col" colspan="2" class="text-center">Action</th>
-                    </tr>
-                </thead>
-                <tbody id="tblBody">
-
-                </tbody>
-            </table>
-            <!-- table ended -->
-        </div>
-
-    </div>
-<!-- main div ended -->
-
-    <footer class="footer">
-        <p>Copyright&nbsp;<i class="fa fa-copyright" style="color: white;"></i>&nbsp;2023&nbsp;Jay Koshti</p>
-        <a href="#" target="_blank">jaykoshti@gmail.com</a>
-    </footer>
+        <!-- footer started -->
+        <footer class="footer">
+            <p>Copyright&nbsp;<i class="fa fa-copyright" style="color: white;"></i>&nbsp;2023&nbsp;Jay Koshti</p>
+            <a href="#" target="_blank">jaykoshti@gmail.com</a>
+        </footer>
+        <!-- footer ended -->
 
 </body>
-
 </html>

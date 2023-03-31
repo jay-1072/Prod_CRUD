@@ -12,13 +12,37 @@ tr td div img {
 }
 
 tr:hover{
-    background-color: rgb(200, 100, 200);;
+    background-color: lightgray;
 }
 
-ul.sort-menu li button:hover {
+ul.dropdown-menu li button:hover {
     background-color: rgb(200, 100, 200);
 }
 
+.footer {
+    min-width: 100%;
+    background-color: rgb(200, 100, 200);
+    color: white;
+    font-size: 100%;
+    position: absolute;
+    bottom: 0;
+    text-align: center;
+}
+
+footer.footer p {
+    text-align: center;
+    margin-bottom: 3px;
+    margin-top: 3px;
+    font-weight: 500;
+}
+
+footer.footer a {
+    margin-top: 0;
+    color: white;
+    text-decoration: none;
+    margin-bottom: 3px;
+    font-weight: 500;
+}
 
 @media screen and (max-width:768px) {
 
@@ -41,31 +65,8 @@ ul.sort-menu li button:hover {
         text-align: center;
         width: 100%;
     }
-
 }
 
-
-.footer {
-    min-width: 100%;
-    background-color: rgb(200, 100, 200);
-    color: white;
-    font-size: 100%;
-    position: absolute;
-    bottom: 0;
-    text-align: center;
+form.hidden_menu { 
+    display:none;
 }
-
-footer.footer p {
-    text-align: center;
-    margin-bottom: 3px;
-    margin-top: 3px;
-}
-
-footer.footer a {
-    margin-top: 0;
-    color: white;
-    text-decoration: none;
-    margin-bottom: 3px;
-}
-
-form.hidden_menu { display:none;}
