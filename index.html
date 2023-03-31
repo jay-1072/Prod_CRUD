@@ -40,16 +40,16 @@
                 </a>
 
                 <!-- collapse button on small screen -->
-                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navitems"
+                <button type="button"  class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navitems"
                     aria-controls="navitems" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
+                    <span id="manuBtn" class="navbar-toggler-icon"></span>
                 </button>
 
                 <!-- nav links -->
                 <div class="collapse navbar-collapse" id="navitems">
                     <div class="navbar-nav ms-auto w-auto">
                     </div>
-                    <form class="d-flex menu-form" role="search">
+                    <form class="d-flex menu-form hidden_menu" id="menuContainer" role="search">
                         <input class="form-control search-box me-2" type="search" placeholder="Search product by id" aria-label="Search" onkeyup="searchProduct(this.value)">
                         <div class="dropdown sort-drp-dwn">
                             <button type="button" class="btn dropdown-toggle bg-light w-100 sort-btn" data-bs-toggle="dropdown" aria-expanded="false">Sort Product By</button>

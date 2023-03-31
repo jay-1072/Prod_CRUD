@@ -43,3 +43,5 @@ ul.sort-menu li button:hover {
     }
 
 }
+
+form.hidden_menu { display:none;}
