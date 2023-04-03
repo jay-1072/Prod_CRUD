@@ -3,6 +3,9 @@ viewProducts();
 
 // Regex for product id.
 const idRegex = /^[0-9]{5}$/;
+const nameRegex = /^([A-Z]*)([a-z]+)([0-9]*)$/;
+const priceRegex = /^[0-9]+$/;
+const imageRegex = /\.(jpe?g|png)$/i; 
 
 let base64, tmpImg = '';
 
@@ -42,6 +45,12 @@ const orig_pimage = document.getElementById("prdImage");
 const orig_pprice = document.getElementById("prdPrice");
 const orig_pdesc = document.getElementById("prdDesc");
 
+const orig_upid = document.getElementById("uprdId");
+const orig_upname = document.getElementById("uprdName");
+const orig_upimage = document.getElementById("uprdImage");
+const orig_upprice = document.getElementById("uprdPrice");
+const orig_updesc = document.getElementById("uprdDesc");
+
 // Add new product function
 function addProduct() {
 
@@ -49,7 +58,7 @@ function addProduct() {
 
     const pid = document.getElementById("prdId").value.trim();
     const pname = document.getElementById("prdName").value.trim();
-    const pimage = document.getElementById("prdImage").value;
+    const pimage = document.getElementById("prdImage").value.trim();
     const pprice = document.getElementById("prdPrice").value.trim();
     const pdesc = document.getElementById("prdDesc").value.trim();
 
@@ -90,7 +99,7 @@ function addProduct() {
             flag = false;
         }
 
-        if (pprice == '') {
+        if (pprice === '') {
             document.getElementById("prdPriceError").innerHTML = "please enter product price";
             document.getElementById("prdPrice").style.border = "1px solid red";
             flag = false;
@@ -106,6 +115,29 @@ function addProduct() {
     if (!idRegex.test(pid) && pid != '') {
         document.getElementById("prdIdError").innerHTML = "Id is invalid it must contain 5 digits only";
         document.getElementById("prdId").style.border = "1px solid red";
+        flag = false;
+    }
+
+    if (!nameRegex.test(pname) && pname != '') {
+        document.getElementById("prdNameError").innerHTML = "Invalid product name (Valid Ex: Product1) don't include space";
+        document.getElementById("prdName").style.border = "1px solid red";
+        flag = false;
+    }
+
+    if (!imageRegex.test(pimage) && pimage != '') {
+        document.getElementById("prdImageError").innerHTML = "Image extension should be .jpg, .jpeg or .png";
+        document.getElementById("prdImage").style.border = "1px solid red";
+        flag = false;
+    }
+
+    if(!priceRegex.test(pprice) && pprice!='') {
+        document.getElementById("prdPriceError").innerHTML = "Price must contain digits only";
+        document.getElementById("prdPrice").style.border = "1px solid red";
+        flag = false;
+    }
+    else if(pprice != '' && pprice.length>5) {
+        document.getElementById("prdPriceError").innerHTML = "Product price limit is 99999.";
+        document.getElementById("prdPrice").style.border = "1px solid red";
         flag = false;
     }
 
@@ -149,6 +181,23 @@ function updateProduct(prd) {
 
 function update() {
 
+    document.getElementById("uprdIdError").innerHTML = "";
+    document.getElementById("uprdId").style = orig_upid;
+
+    document.getElementById("uprdNameError").innerHTML = "";
+    document.getElementById("uprdName").style = orig_upname;
+
+    document.getElementById("uprdImageError").innerHTML = "";
+    document.getElementById("uprdImage").style = orig_upimage;
+
+    document.getElementById("uprdPriceError").innerHTML = "";
+    document.getElementById("uprdPrice").style = orig_upprice;
+
+    document.getElementById("uprdDescError").innerHTML = "";
+    document.getElementById("uprdDesc").style = orig_updesc;
+
+    
+
     let prds = JSON.parse(localStorage.getItem('products'));
 
     prds.forEach(obj => {
@@ -165,6 +214,7 @@ function update() {
     targetObj.pImage = tmpImg;
     targetObj.pPrice = document.getElementById("uprdPrice").value;
     targetObj.pDesc = document.getElementById("uprdDesc").value;
+
 
     if (flag) {
 
@@ -202,6 +252,23 @@ function update() {
     if (!idRegex.test(targetObj.pId) && targetObj.pId != '') {
         document.getElementById("uprdIdError").innerHTML = "Id is invalid it must contain 5 digits only";
         document.getElementById("uprdId").style.border = "1px solid red";
+        flag = false;
+    }
+
+    if (!nameRegex.test(targetObj.pName) && targetObj.pName != '') {
+        document.getElementById("uprdNameError").innerHTML = "Invalid product name";
+        document.getElementById("uprdName").style.border = "1px solid red";
+        flag = false;
+    }
+
+    if(!priceRegex.test(targetObj.pPrice) && targetObj.pPrice!='') {
+        document.getElementById("uprdPriceError").innerHTML = "Price must contain digits only";
+        document.getElementById("uprdPrice").style.border = "1px solid red";
+        flag = false;
+    }
+    else if(targetObj.pPrice != '' && (targetObj.pPrice).length>5) {
+        document.getElementById("uprdPriceError").innerHTML = "Product price limit is 99999.";
+        document.getElementById("uprdPrice").style.border = "1px solid red";
         flag = false;
     }
 
@@ -604,3 +671,15 @@ function hide_menu(evt) {
 }
 
 document.addEventListener('click', hide_menu, false);
+
+
+function check(e) {
+
+    const arrowsKeyCodes = [37, 38, 39, 40];
+    // 'numpad 0', 'numpad 1',  'numpad 2', 'numpad 3', 'numpad 4', 'numpad 5', 'numpad 6', 'numpad 7', 'numpad 8', 'numpad 9'
+    const numPadNumberKeyCodes = [96, 97, 98, 99, 100, 101, 102, 103, 104, 105];
+
+    if ((e.keyCode < 48 && !arrowsKeyCodes.includes(e.keyCode) || e.keyCode > 57 && !numPadNumberKeyCodes.includes(e.keyCode)) && !(e.keyCode === 8)) {
+        e.preventDefault()
+    }
+}

@@ -51,6 +51,7 @@
                     <form class="d-flex menu-form hidden_menu" id="menuContainer" role="search">
                         <input class="form-control search-box me-2" type="search" placeholder="Search product by id"
                             aria-label="Search" onkeyup="searchProduct(this.value)">
+                            
                         <div class="dropdown sort-drp-dwn">
                             <button type="button" class="btn dropdown-toggle bg-light w-100 sort-btn"
                                 data-bs-toggle="dropdown" aria-expanded="false">Sort Product By</button>
@@ -82,7 +83,7 @@
                     <div class="col">
                         <!-- Button trigger modal -->
                         <button type="button" class="btn my-4 btn-outline-secondary new-prd" data-bs-toggle="modal"
-                            data-bs-target="#newPrdModal">
+                            data-bs-target="#newPrdModal"><i class="fa-regular fa-plus"></i>
                             New Product
                         </button>
                     </div>
@@ -110,7 +111,7 @@
                             <!-- for Product Id -->
                             <div class="mb-3">
                                 <label class="mb-1" for="prdId">Product Id</label>
-                                <input type="text" class="form-control shadow-none prd-id" id="prdId" name="prdId">
+                                <input type="text" class="form-control shadow-none prd-id" id="prdId" name="prdId" onkeydown="check(event)" onkeyup="check(event)">
                                 <strong id="prdIdError" class="text-danger font-wight-bold"></strong>
                             </div>
                             <!-- for Product Name -->
@@ -131,7 +132,7 @@
                             <div class="mb-3">
                                 <label class="mb-1" for="prdPrice">Product Price</label>
                                 <input type="text" class="form-control shadow-none prd-price" id="prdPrice"
-                                    name="prdPrice">
+                                    name="prdPrice" onkeydown="check(event)" onkeyup="check(event)">
                                 <strong id="prdPriceError" class="text-danger font-wight-bold"></strong>
                             </div>
                             <!-- For Product Description -->
@@ -191,7 +192,7 @@
                             <!-- for Product Id -->
                             <div class="mb-3">
                                 <label class="mb-1" for="uprdId">Product Id</label>
-                                <input type="text" class="form-control shadow-none uprd-id" id="uprdId" name="uprdId">
+                                <input type="text" class="form-control shadow-none uprd-id" id="uprdId" name="uprdId" onkeydown="check(event)" onkeyup="check(event)">
                                 <strong id="uprdIdError" class="text-danger font-wight-bold"></strong>
                             </div>
                             <!-- for Product Name -->
@@ -212,7 +213,7 @@
                             <div class="mb-3">
                                 <label class="mb-1" for="uprdPrice">Product Price</label>
                                 <input type="text" class="form-control shadow-none uprd-price" id="uprdPrice"
-                                    name="uprdPrice">
+                                    name="uprdPrice" onkeydown="check(event)" onkeyup="check(event)">
                                 <strong id="uprdPriceError" class="text-danger font-wight-bold"></strong>
                             </div>
                             <!-- For Product Description -->

@@ -1,3 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=PT+Serif&display=swap');
+
+* {
+    box-sizing: border-box;
+    font-family: serif;
+    font-size: calc(15px + 0.314vw);
+}
+
 button.new-prd {
     color: rgb(200, 100, 200);
     font-weight: 500;
@@ -24,7 +32,7 @@ ul.dropdown-menu li button:hover {
     background-color: rgb(200, 100, 200);
     color: white;
     font-size: 100%;
-    position: absolute;
+    position: fixed;
     bottom: 0;
     text-align: center;
 }
