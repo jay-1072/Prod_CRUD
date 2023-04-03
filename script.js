@@ -5,7 +5,6 @@ viewProducts();
 const idRegex = /^[0-9]{5}$/;
 const nameRegex = /^([A-Z]*)([a-z]+)([0-9]*)$/;
 const priceRegex = /^[0-9]+$/;
-const imageRegex = /\.(jpe?g|png)$/i; 
 
 let base64, tmpImg = '';
 
@@ -124,12 +123,6 @@ function addProduct() {
         flag = false;
     }
 
-    if (!imageRegex.test(pimage) && pimage != '') {
-        document.getElementById("prdImageError").innerHTML = "Image extension should be .jpg, .jpeg or .png";
-        document.getElementById("prdImage").style.border = "1px solid red";
-        flag = false;
-    }
-
     if(!priceRegex.test(pprice) && pprice!='') {
         document.getElementById("prdPriceError").innerHTML = "Price must contain digits only";
         document.getElementById("prdPrice").style.border = "1px solid red";
@@ -180,6 +173,8 @@ function updateProduct(prd) {
 }
 
 function update() {
+
+    
 
     document.getElementById("uprdIdError").innerHTML = "";
     document.getElementById("uprdId").style = orig_upid;
